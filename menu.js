@@ -1,10 +1,11 @@
 let phase = 0;
 let zoff = 0;
 let slider;
-
+let sizeСoef = windowWidth * windowHeight;
+//Скорость метиоров зависит от шума
 function setup() {
-  createCanvas(400, 400);
-  slider = createSlider(0, 10, 3, 0.1);
+  createCanvas(windowWidth, windowHeight);
+  slider = createSlider(0, 50, 10, 0.1);
 }
 
 function draw() {

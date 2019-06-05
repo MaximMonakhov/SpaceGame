@@ -6,19 +6,46 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Space Game</title>
+  <link rel="shortcut icon" href="/img/icon.png" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.dom.min.js"></script>
-  <script src="sketch.js"></script>
-  <script src="rock.js"></script>
-  <script src="ship.js"></script>
-  <script src="laser.js"></script>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="js/sketch.js"></script>
+  <script src="js/rock.js"></script>
+  <script src="js/ship.js"></script>
+  <script src="js/laser.js"></script>
+  <script src="js/menu.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body>
 
-  <div class="score">Score:<span id="score">0</span></div>
+  <div class="score" id="score">Score:<span id="scoreInt">0</span></div>
+
+  <div class="menu" id="menu">
+    <h1>Space Game</h1>
+    <button type="button" name="button" class="startButton" onclick="startGame()">Start</button>
+    <p>Difficulty</p>
+    <div class="buttons">
+      <button type="button" name="button" class="smallButton difficulty" onclick="clicked(this)">Easy</button>
+      <button type="button" name="button" class="smallButton difficulty pressed" onclick="clicked(this)">Hard</button>
+      <button type="button" name="button" class="smallButton difficulty" onclick="clicked(this)">Extreme</button>
+    </div>
+    <p>Life Count</p>
+    <div class="buttons">
+      <button type="button" name="button" class="smallButton lifeCount" onclick="clicked(this)">1</button>
+      <button type="button" name="button" class="smallButton lifeCount pressed" onclick="clicked(this)">3</button>
+      <button type="button" name="button" class="smallButton lifeCount" onclick="clicked(this)">5</button>
+    </div>
+    <div class="info">
+      The more difficult the level and <br>the smaller the number of lives, <br>the more points you get.
+      <br>Сontrolled by arrows.<br>Press ESC to return to the menu.<br>Have fun!
+    </div>
+  </div>
+
+  <div id="bestScore">
+    Best Score: <span id="bestScoreInt">0</span>
+  </div>
 
 </body>
 

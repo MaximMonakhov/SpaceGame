@@ -40,9 +40,10 @@ class Rock {
         this.velocity.mult(3);
       }
       else {
-        if (this.interiorSize < 40)
+        if (this.interiorSize < 40) {
           this.waveSize = 20;
           this.velocity.mult(2);
+        }
       }
     }
     else
@@ -62,7 +63,7 @@ class Rock {
       this.radius = (r + this.interiorSize) / 2;
     }
     endShape(CLOSE);
-//    circle (this.pos.x, this.pos.y, this.radius);
+    
     this.phase += 0.003;
     this.zoff += 0.01;
   }

@@ -26,8 +26,8 @@ Press `Esc` to return to the menu.
 
 You get 1/2/3 points for destruction of big / medium / small targets.<br />
 Plus, add coefficients for the difficulty and number of lives.<br />
-1/1.5/2 points for easy / hard / extreme difficulty.<br />
-1/2/3 points for 5 / 3 / 1 lives, respectively.<br />
+1/1.5/2 for easy / hard / extreme difficulty.<br />
+1/2/3 for 5 / 3 / 1 lives, respectively.<br />
 
 ## Thanks!
 

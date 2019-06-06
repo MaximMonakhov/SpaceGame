@@ -28,7 +28,7 @@ function draw() {
   strokeWeight(1);
   noFill();
   for (var i = 0; i < rocks.length; i++) {
-    if (game)
+    /*if (game)
       if (ship.hits(rocks[i])){
         if (lifeCount > 1) {
           lifeCount--;
@@ -36,7 +36,7 @@ function draw() {
         }
         else
           endGame();
-      }
+      }*/
 
     rocks[i].noise();
     rocks[i].move();
@@ -118,6 +118,8 @@ function gameProcces(){
   ship.turn();
   ship.update();
   ship.walls();
+
+  drawLives(lifeCount);
 
   keyCheck();
 }
@@ -234,4 +236,13 @@ function throttle(func, ms) {
   }
 
   return wrapper;
+}
+
+function drawLives(lifeCount){
+  push();
+  strokeWeight(3);
+  for (var i = 1; i <= lifeCount; i++) {
+    circle(width-35*i+10, 25, 25);
+  }
+  pop();
 }

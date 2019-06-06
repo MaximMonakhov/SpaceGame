@@ -32,22 +32,27 @@ class Rock {
     this.zoff = random(50);
     this.waveSize = 40;
     this.radius = 0;
+    this.sizeClass = 1;
 
     if (size) {
       this.interiorSize = size * 0.5;
       if (this.interiorSize <= 20) {
         this.waveSize = 20;
         this.velocity.mult(3);
+        this.sizeClass = 3;
       }
       else {
         if (this.interiorSize < 40) {
           this.waveSize = 20;
           this.velocity.mult(2);
+          this.sizeClass = 2;
         }
       }
     }
-    else
-      this.interiorSize = random(40, 100);
+    else {
+      this.interiorSize = random(60, 100);
+      this.sizeClass = 1;
+    }
   }
 
   noise(){
@@ -63,7 +68,7 @@ class Rock {
       this.radius = (r + this.interiorSize) / 2;
     }
     endShape(CLOSE);
-    
+
     this.phase += 0.003;
     this.zoff += 0.01;
   }

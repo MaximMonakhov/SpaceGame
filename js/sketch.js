@@ -1,4 +1,5 @@
-//Жизни, появление астеройдов, счет
+//Появление астеройдов
+//Баг с срабатыванием волны
 let rocks = [];
 let lasers = [];
 let rockets = [];
@@ -9,6 +10,7 @@ let maxScore = 0;
 let rocksMaxCount = 30;
 let lifeCount = 0;
 let game = false;
+let scoreCoef = 1;
 let shockReloadTime = 10000;
 let rocketReloadTime = 1000;
 let newRocket = throttle(function() {rockets.push(new Rocket(ship.pos, ship.angle));}, rocketReloadTime);
@@ -25,9 +27,16 @@ function draw() {
   stroke(255);
   strokeWeight(1);
   noFill();
-
   for (var i = 0; i < rocks.length; i++) {
-    //if (ship.hits(rocks[i])){}
+    if (game)
+      if (ship.hits(rocks[i])){
+        if (lifeCount > 1) {
+          lifeCount--;
+          ship = new Ship();
+        }
+        else
+          endGame();
+      }
 
     rocks[i].noise();
     rocks[i].move();
@@ -55,7 +64,7 @@ function gameProcces(){
             rocks = rocks.concat(newRocks);
           }
           else {
-            score++;
+            score+=rocks[j].sizeClass*scoreCoef;
             var scoreDiv = document.getElementById("scoreInt");
             scoreDiv.innerHTML = score;
           }
@@ -75,7 +84,7 @@ function gameProcces(){
     else {
       for (var j = rocks.length - 1; j >= 0; j--) {
         if (rockets[i].hits(rocks[j])) {
-            score++;
+            score+=rocks[j].sizeClass*scoreCoef;
             var scoreDiv = document.getElementById("scoreInt");
             scoreDiv.innerHTML = score;
             rocks.splice(j, 1);
@@ -92,7 +101,7 @@ function gameProcces(){
     for (var j = rocks.length - 1; j >= 0; j--) {
       if (shockWave) {
         if (shockWave.hits(rocks[j], ship.pos)) {
-            score++;
+            score+=rocks[j].sizeClass*scoreCoef;
             var scoreDiv = document.getElementById("scoreInt");
             scoreDiv.innerHTML = score;
             rocks.splice(j, 1);
@@ -149,14 +158,26 @@ function startGame(){
   let scoreInt = document.getElementById("scoreInt");
   let bestScoreDiv = document.getElementById("bestScore");
 
-  if (settings[0].innerHTML == "Easy")
-    rocksMaxCount = 10;
-  if (settings[0].innerHTML == "Hard")
-    rocksMaxCount = 20;
-  if (settings[0].innerHTML == "Extreme")
-    rocksMaxCount = 30;
+  if (settings[0].innerHTML == "Easy"){
+      rocksMaxCount = 10;
+      scoreCoef = 1;
+  }
+  if (settings[0].innerHTML == "Hard"){
+      rocksMaxCount = 20;
+      scoreCoef = 1.5;
+  }
+  if (settings[0].innerHTML == "Extreme"){
+      rocksMaxCount = 30;
+      scoreCoef = 2;
+  }
 
   lifeCount = settings[1].innerHTML;
+  if (lifeCount == 3) {
+    scoreCoef *= 2;
+  }
+  if (lifeCount == 1) {
+    scoreCoef *= 3;
+  }
 
   menu.style.display = 'none';
   scoreDiv.style.display = 'block';

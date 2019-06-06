@@ -1,7 +1,7 @@
 class ShockWave {
   constructor(pos){
     this.r = 0;
-    this.maxR = 100;
+    this.maxR = 200;
   }
 
   show(pos){

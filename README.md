@@ -2,6 +2,10 @@
 
 A simple game in JavaScript with the p5.js library
 
+## Play it
+
+https://maximmonakhov.github.io/SpaceGame/
+
 ## Information
 
 ### Control

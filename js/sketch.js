@@ -1,23 +1,17 @@
-//Появление астеройдов
-//Баг с срабатыванием волны
-let rocks = [];
-let lasers = [];
-let rockets = [];
-let shockWave;
-let ship;
+let ship, rocks = [], lasers = [], rockets = [], shockWave;
+
 let score = 0;
 let maxScore = 0;
 let rocksMaxCount = 30;
 let lifeCount = 0;
-let game = false;
 let scoreCoef = 1;
-let shockReloadTime = 10000;
-let rocketReloadTime = 1000;
-let newRocket = throttle(function() {rockets.push(new Rocket(ship.pos, ship.angle));}, rocketReloadTime);
-let newShockWave = throttle(function() {shockWave = new ShockWave();}, shockReloadTime);
+
+let game = false;
+let newRocket = throttle(function() {rockets.push(new Rocket(ship.pos, ship.angle));}, 1000);
+let newShockWave = throttle(function() {shockWave = new ShockWave();}, 10000);
 
 function setup() {
-  createCanvas(windowWidth+1, windowHeight);
+  createCanvas(windowWidth + 1, windowHeight);
   for (var i = 0; i < rocksMaxCount; i++)
     rocks[i] = new Rock();
 }
@@ -27,16 +21,18 @@ function draw() {
   stroke(255);
   strokeWeight(1);
   noFill();
+
   for (var i = 0; i < rocks.length; i++) {
-    /*if (game)
-      if (ship.hits(rocks[i])){
+    if (game)
+      if (ship.hits(rocks[i]) & !ship.reload){
         if (lifeCount > 1) {
           lifeCount--;
           ship = new Ship();
+          startTimer(ship);
         }
         else
           endGame();
-      }*/
+      }
 
     rocks[i].noise();
     rocks[i].move();
@@ -65,8 +61,7 @@ function gameProcces(){
           }
           else {
             score+=rocks[j].sizeClass*scoreCoef;
-            var scoreDiv = document.getElementById("scoreInt");
-            scoreDiv.innerHTML = score;
+            document.getElementById("scoreInt").innerHTML = score;
           }
           rocks.splice(j, 1);
           lasers.splice(i, 1);
@@ -85,8 +80,7 @@ function gameProcces(){
       for (var j = rocks.length - 1; j >= 0; j--) {
         if (rockets[i].hits(rocks[j])) {
             score+=rocks[j].sizeClass*scoreCoef;
-            var scoreDiv = document.getElementById("scoreInt");
-            scoreDiv.innerHTML = score;
+            document.getElementById("scoreInt").innerHTML = score;
             rocks.splice(j, 1);
             rockets.splice(i, 1);
             break;
@@ -102,8 +96,7 @@ function gameProcces(){
       if (shockWave) {
         if (shockWave.hits(rocks[j], ship.pos)) {
             score+=rocks[j].sizeClass*scoreCoef;
-            var scoreDiv = document.getElementById("scoreInt");
-            scoreDiv.innerHTML = score;
+            document.getElementById("scoreInt").innerHTML = score;
             rocks.splice(j, 1);
             break;
         }
@@ -208,6 +201,22 @@ function endGame(){
   score = 0;
 }
 
+function drawLives(lifeCount){
+  push();
+  noFill();
+  stroke(255);
+  strokeWeight(3);
+  for (var i = 1; i <= lifeCount; i++) {
+    circle(width - 35 * i + 10, 25, 25);
+  }
+  pop();
+}
+
+function startTimer(obj) {
+  obj.reloadTimer = new Date();
+  obj.reload = true;
+}
+
 function throttle(func, ms) {
 
   var isThrottled = false,
@@ -236,13 +245,4 @@ function throttle(func, ms) {
   }
 
   return wrapper;
-}
-
-function drawLives(lifeCount){
-  push();
-  strokeWeight(3);
-  for (var i = 1; i <= lifeCount; i++) {
-    circle(width-35*i+10, 25, 25);
-  }
-  pop();
 }

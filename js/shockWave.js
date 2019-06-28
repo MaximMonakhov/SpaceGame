@@ -18,8 +18,6 @@ class ShockWave {
 
   hits(rock, pos){
     var d = dist(pos.x, pos.y, rock.pos.x, rock.pos.y);
-    if (d < rock.radius + this.r/2)
-      return true;
-    else return false;
+    return d < rock.radius + this.r/2;
   }
 }

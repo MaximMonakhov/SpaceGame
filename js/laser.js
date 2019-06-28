@@ -16,9 +16,7 @@ class Laser {
 
   hits(rock){
     var d = dist(this.pos.x, this.pos.y, rock.pos.x, rock.pos.y);
-    if (d < rock.radius)
-      return true;
-    else return false;
+    return d < rock.radius;
   }
 
   outOfScreen(){

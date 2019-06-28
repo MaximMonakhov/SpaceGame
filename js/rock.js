@@ -1,33 +1,35 @@
 class Rock {
   constructor(pos, size) {
-  /*  switch (round(random(3))){
-      case 0:
-        this.x = -50;
-        this.y = random(-100, windowHeight + 100);
-        this.vector = random (-PI/4, PI/4); Vector from angle
-        break;
-      case 1:
-        this.x = random(-100, windowWidth + 100);
-        this.y = -50;
-        this.vector = random (PI/4, 3*PI/4);
-        break;
-      case 2:
-        this.x = windowWidth + 50;
-        this.y = random(-100, windowHeight + 100);
-        this.vector = random (3*PI/4, 5*PI/4);
-        break;
-      case 3:
-        this.x = random(-100, windowWidth + 100);
-        this.y = windowHeight + 50;
-        this.vector = random (5*PI/4, 7*PI/4);
-        break;
-    }*/
-
-    if (pos)
-      this.pos = pos.copy();
-    else
+    if (game)
+      if (pos)
+      {
+        this.pos = pos.copy();
+        this.velocity = p5.Vector.random2D();
+      }
+      else
+        switch (round(random(3))){
+          case 0:
+            this.pos = createVector(-50, random(-100, windowHeight + 100));
+            this.velocity = p5.Vector.fromAngle(random (-PI/4, PI/4));
+            break;
+          case 1:
+            this.pos = createVector(random(-100, windowWidth + 100), -50);
+            this.velocity = p5.Vector.fromAngle(random (PI/4, 3*PI/4));
+            break;
+          case 2:
+            this.pos = createVector(windowWidth + 50, random(-100, windowHeight + 100));
+            this.velocity = p5.Vector.fromAngle(random (3*PI/4, 5*PI/4));
+            break;
+          case 3:
+            this.pos = createVector(random(-100, windowWidth + 100), windowHeight + 50);
+            this.velocity = p5.Vector.fromAngle(random (5*PI/4, 7*PI/4));
+            break;
+        }
+    else {
       this.pos = createVector(random(width), random(height));
-    this.velocity = p5.Vector.random2D();
+      this.velocity = p5.Vector.random2D();
+    }
+
     this.phase = 0;
     this.zoff = random(50);
     this.waveSize = 40;
@@ -56,6 +58,8 @@ class Rock {
   }
 
   noise(){
+    push();
+    fill(10);
     beginShape();
     let noiseMax = 10;
     for (let a = 0; a < TWO_PI; a += radians(5)) {
@@ -71,6 +75,7 @@ class Rock {
 
     this.phase += 0.003;
     this.zoff += 0.01;
+    pop();
   }
 
   move(){

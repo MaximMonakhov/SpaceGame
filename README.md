@@ -11,7 +11,13 @@ https://maximmonakhov.github.io/SpaceGame/
 ### Control
 
 Ship is controlled by arrows.<br />
+You are invulnerable when there is a blue shield next to the ship.<br />
+Shield duration is `5` seconds. <br />
 Press `Esc` to return to the menu.
+
+### Difficulty
+
+The higher the difficulty of the game, the more asteroids you meet and the more points you get
 
 ### Weapons
 
@@ -28,10 +34,10 @@ Press `Esc` to return to the menu.
 
 ### Point system
 
-You get 1/2/3 points for destruction of big / medium / small targets.<br />
+You get 1 / 2 / 3 points for destruction of big / medium / small targets.<br />
 Plus, add coefficients for the difficulty and number of lives.<br />
-1/1.5/2 for easy / hard / extreme difficulty.<br />
-1/2/3 for 5 / 3 / 1 lives, respectively.<br />
+1 / 1.5 / 2 for easy / hard / extreme difficulty.<br />
+1 / 2 / 3 for 5 / 3 / 1 lives, respectively.<br />
 
 ## Thanks!
 

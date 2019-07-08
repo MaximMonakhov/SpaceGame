@@ -12,7 +12,7 @@ let newShockWave = throttle(function() {shockWave = new ShockWave();}, 10000);
 
 function setup() {
   createCanvas(windowWidth + 1, windowHeight);
-  for (var i = 0; i < rocksMaxCount; i++)
+  for (let i = 0; i < rocksMaxCount; i++)
     rocks[i] = new Rock();
 }
 
@@ -22,7 +22,7 @@ function draw() {
   strokeWeight(1);
   noFill();
 
-  for (var i = 0; i < rocks.length; i++) {
+  for (let i = 0; i < rocks.length; i++) {
     if (game)
       if (ship.hits(rocks[i]) && !ship.reload){
         if (lifeCount > 1) {
@@ -47,13 +47,13 @@ function draw() {
 }
 
 function gameProcces(){
-  for (var i = lasers.length - 1; i >= 0; i--) {
+  for (let i = lasers.length - 1; i >= 0; i--) {
     lasers[i].show();
     lasers[i].move();
     if (lasers[i].outOfScreen())
       lasers.splice(i, 1);
     else {
-      for (var j = rocks.length - 1; j >= 0; j--) {
+      for (let j = rocks.length - 1; j >= 0; j--) {
         if (lasers[i].hits(rocks[j])) {
           if (rocks[j].radius > 25) {
             var newRocks = rocks[j].breakup();
@@ -71,13 +71,13 @@ function gameProcces(){
     }
   }
 
-  for (var i = rockets.length - 1; i >= 0; i--) {
+  for (let i = rockets.length - 1; i >= 0; i--) {
     rockets[i].show();
     rockets[i].move();
     if (rockets[i].outOfScreen())
       rockets.splice(i, 1);
     else {
-      for (var j = rocks.length - 1; j >= 0; j--) {
+      for (let j = rocks.length - 1; j >= 0; j--) {
         if (rockets[i].hits(rocks[j])) {
             score+=rocks[j].sizeClass*scoreCoef;
             document.getElementById("scoreInt").innerHTML = score;
@@ -92,7 +92,7 @@ function gameProcces(){
   if (shockWave){
     shockWave.show(ship.pos);
     shockWave.update();
-    for (var j = rocks.length - 1; j >= 0; j--) {
+    for (let j = rocks.length - 1; j >= 0; j--) {
       if (shockWave) {
         if (shockWave.hits(rocks[j], ship.pos)) {
             score+=rocks[j].sizeClass*scoreCoef;
@@ -206,7 +206,7 @@ function drawLives(lifeCount){
   noFill();
   stroke(255);
   strokeWeight(3);
-  for (var i = 1; i <= lifeCount; i++) {
+  for (let i = 1; i <= lifeCount; i++) {
     circle(width - 35 * i + 10, 25, 25);
   }
   pop();

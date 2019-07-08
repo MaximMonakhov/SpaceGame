@@ -201,7 +201,7 @@ function endGame(){
   score = 0;
 }
 
-function drawLives(lifeCount){
+function drawLives(){
   push();
   noFill();
   stroke(255);

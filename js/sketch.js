@@ -24,7 +24,7 @@ function draw() {
 
   for (var i = 0; i < rocks.length; i++) {
     if (game)
-      if (ship.hits(rocks[i]) & !ship.reload){
+      if (ship.hits(rocks[i]) && !ship.reload){
         if (lifeCount > 1) {
           lifeCount--;
           ship = new Ship();

@@ -112,7 +112,7 @@ function gameProcces(){
   ship.update();
   ship.walls();
 
-  drawLives(lifeCount);
+  drawLives();
 
   keyCheck();
 }
